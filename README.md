@@ -4,7 +4,7 @@ This is a package of Vue input and form components
 
 ## Install
 
-The most flexible way to uses the components is to clone this repository locally and copy-past the `/src/Components` into your own project.
+The most flexible way to uses the components is to clone this repository locally and copy-paste the `/src/Components` into your own project.
 
 ### CSS
 
@@ -56,4 +56,3 @@ Add the `important` id to the layout `<body>` element
 ...
 </body>
 ```
-## Usage
