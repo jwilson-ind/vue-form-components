@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.vue-form-components {
+
+    .input-label, .checkbox-label, .radio-label {
+        @apply block whitespace-nowrap text-sm;
+    }
+
+    .input-text, .input-textarea, .input-multiple, .multiple-label, .multiple-remove {
+        @apply appearance-none block px-3 py-2 border border-gray-200 placeholder-gray-300 focus:outline-none;
+    }
+
+    .input-text, .input-textarea {
+        @apply placeholder-gray-300 w-full focus:outline-none rounded;
+    }
+
+    .input-textarea {
+        @apply resize-y;
+    }
+
+    .checkbox-label, .radio-label {
+        @apply inline-block cursor-pointer mr-6 my-2;
+    }
+
+    .checkbox-label.disabled, .radio-label.disabled {
+        @apply cursor-not-allowed text-gray-400;
+    }
+
+    .input-checkbox, .input-radio {
+        @apply h-4 w-4 cursor-pointer;
+    }
+
+    .input-checkbox {
+        @apply rounded;
+    }
+
+    .input-text,
+    .input-checkbox,
+    .input-radio,
+    .multiselect__tags,
+    .multiselect__current,
+    .multiselect__content-wrapper {
+        @apply border-gray-300 !important;
+    }
+
+    .btn-primary, .btn-red, .btn-green, .btn-white {
+        @apply py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-offset-2 transition;
+    }
+
+    .btn-primary:disabled, .btn-orange:disabled, .btn-red:disabled, .btn-green:disabled, .btn-white:disabled {
+        @apply cursor-not-allowed bg-gray-400 hover:bg-gray-400;
+    }
+
+    .btn-primary {
+        @apply bg-blue-600 hover:bg-blue-700 focus:ring-blue-600;
+    }
+
+    .btn-white {
+        @apply bg-white border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-blue-500;
+    }
+
+    .btn-green {
+        @apply bg-green-600 hover:bg-green-700 focus:ring-green-600 capitalize;
+    }
+
+    .btn-red {
+        @apply bg-red-600 hover:bg-red-700 focus:ring-red-600;
+    }
+
+}
