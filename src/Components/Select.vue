@@ -1,5 +1,5 @@
 <template>
-    <label v-if="type === 'list'" :for="id+'_list_item_'+index" :class="[multiple ? 'checkbox-label' : 'radio-label', {disabled: disabled}]" v-for="(option, index) in selectOptions">
+    <label v-if="type === 'list'" :for="id+'_list_item_'+index" :class="[multiple ? 'checkbox-label' : 'radio-label', {disabled: disabled}, listItemClass]" v-for="(option, index) in selectOptions">
         <input v-if="multiple" :id="id+'_list_item_'+index" class="input-checkbox" type="checkbox" :value="isFieldSelect ? option[field ?? 'id'] : option" :disabled="disabled" v-model="multipleValue">
         <input v-else :id="id+'_list_item_'+index" class="input-radio" type="radio" :value="isFieldSelect ? option[field ?? 'id'] : option" :disabled="disabled" v-model="thisModelValue" @change="$emit('update:modelValue', $event.target.value)">
         <span class="cursor-pointer ml-2 align-middle">{{ isFieldSelect ? option[label ?? 'name'] : renderOption(option) }}</span>
@@ -7,7 +7,7 @@
     <AsyncSelect v-else-if="type === 'async'" :url="url" v-model="thisModelValue" :multiple="multiple" :field="field" :label="label" :filters="filters" :search-columns="searchColumns" :limit="limit" :preload="preload" :placeholder="placeholder" :disabled="disabled" @update:modelValue="$emit('update:modelValue', $event)"></AsyncSelect>
     <FieldSelect v-else-if="isFieldSelect" v-model="thisModelValue" :multiple="multiple" :field="field" :label="label" :options="selectOptions" :placeholder="placeholder" :disabled="disabled" @update:modelValue="$emit('update:modelValue', $event)"></FieldSelect>
     <select v-else-if="type === 'basic'" class="input-select" :value="modelValue" :disabled="disabled" @change="$emit('update:modelValue', $event.target.value)">
-        <option :value="null">select...</option>
+        <option value="" :disabled="required === true">select...</option>
         <option v-for="option in selectOptions" :value="option">{{ renderOption(option) }}</option>
     </select>
     <VueSelect v-else
@@ -61,6 +61,9 @@ const props = defineProps({
     label: {
         type: String,
     },
+    listItemClass: {
+        type: String,
+    },
     filters: {
         type: Array,
     },
@@ -83,7 +86,13 @@ const props = defineProps({
         default() {
             return false;
         }
-    }
+    },
+    required: {},
+    titleCaseOptions: {
+        default() {
+            return false;
+        }
+    },
 })
 
 const multipleValue = ref(Array.isArray(props.modelValue) ? props.modelValue : []);
@@ -109,6 +118,6 @@ const isFieldSelect = computed(() => {
 });
 
 function renderOption(option) {
-    return typeof option === 'string' ? titleCase(option) : option;
+    return typeof option === 'string' && props.titleCaseOptions ? titleCase(option) : option;
 }
 </script>

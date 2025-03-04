@@ -11,7 +11,7 @@
 const props = defineProps({
     context: {
         type: String,
-        default: 'btn-primary',
+        default: 'form-btn-primary',
     },
     type: {
         type: String,

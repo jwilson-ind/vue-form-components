@@ -12,7 +12,15 @@
             :loading="loading"
             :show-no-options="false"
             @search-change="emit('searchChange', $event)"
-        ></MultiSelect>
+        >
+            <template v-slot:singleLabel="{option}">
+                <slot name="selectedOption" :option="option"></slot>
+            </template>
+            <template v-slot:option="{option}">
+                <slot name="option" :option="option"></slot>
+            </template>
+            <template #noResult>No Results Found</template>
+        </MultiSelect>
     </div>
 </template>
 

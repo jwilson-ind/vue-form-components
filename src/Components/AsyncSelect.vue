@@ -24,7 +24,9 @@
                :show-no-options="false"
                @update:modelValue="$emit('update:modelValue', $event)"
                @search-change="search"
-    ></VueSelect>
+    >
+        <template #noResult>No Results Found</template>
+    </VueSelect>
 </template>
 
 <script setup>
@@ -65,6 +67,9 @@ const props = defineProps({
         }
     },
     filters: {
+        type: Array,
+    },
+    relations: {
         type: Array,
     },
     limit: {
@@ -117,16 +122,18 @@ onMounted(() => {
 })
 
 function search(value) {
-    if(value && value !== '') {
-        const searchFilters = props.filters
-            ? props.filters.map(filter => {
+    if(value && value !== '' && value.length > 3) {
+        const searchFilters = [
+            ...(props.filters?.map(filter => {
+                if(!filter.hasOwnProperty('value')) {
                 filter.value = value;
+                }
                 return filter;
-            })
-            : (props.searchColumns.length
+            }) ?? []),
+            ...(props.searchColumns.length
                     ? [{rawColumn: props.searchColumns.join(" || ' ' || "), operator: 'contains', value: value}]
                     : [{column: props.field ?? props.label, operator: 'contains', value: value}]
-            );
+            )];
         fetchOptions(searchFilters);
     }
 }
@@ -135,6 +142,7 @@ function fetchOptions(searchFilters) {
     loading.value = true;
     axios.post(props.url, {
         search: searchFilters,
+        relations: props.relations,
         limit: props.limit,
     }).then(response => {
         if (response.data.success && response.data.records) {

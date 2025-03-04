@@ -3,6 +3,7 @@
                   :type="type"
                   :multiple="multiple"
                   :select="select"
+                  :wysiwyg="wysiwyg"
                   :label="inputLabel"
                   v-model="form[field]"
                   :attachments="form.attachments"
@@ -34,6 +35,7 @@ const props = defineProps({
         required: true,
     },
     id: {},
+    idSuffix: {},
     label: {
         type: String,
     },
@@ -47,6 +49,9 @@ const props = defineProps({
         }
     },
     select: {
+        type: Object,
+    },
+    wysiwyg: {
         type: Object,
     },
     acceptableTypes: {
@@ -67,17 +72,19 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+	errors: {},
 });
 
 const inputId = computed(() => {
-    return props.id ? props.id : props.field+'_'+Math.random().toString(36).slice(2);
+    return props.id ? props.id : props.field+'_'+(props.idSuffix ?? Math.random().toString(36).slice(2));
 });
 const inputLabel = computed(() => {
     return props.label ? props.label : titleCase(props.field);
 });
 const inputErrors = computed(() => {
+	const errors = props.errors ?? props.form.errors;
     let field = props.field+(props.type === 'file' ? '.file' : '');
-    return props.form.errors && props.form.errors[field] ? props.form.errors[field] : [];
+    return errors && errors[field] ? errors[field] : [];
 });
 
 function removeAttachment( attachment ) {

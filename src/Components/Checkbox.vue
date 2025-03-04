@@ -1,5 +1,5 @@
 <template>
-    <input :id="id" type="checkbox" :value="value" v-model="proxyChecked"/>
+    <input :id="id" type="checkbox" :value="value" v-model="proxyChecked" :disabled="disabled" class="disabled:cursor-not-allowed"/>
 </template>
 
 <script setup>
@@ -15,6 +15,10 @@ const props = defineProps({
     value: {
         default: null,
     },
+	disabled: {
+		type: Boolean,
+		default: false,
+	}
 });
 
 const proxyChecked = computed({

@@ -19,7 +19,7 @@
                 <div class="multiple-remove rounded-l-none bg-gray-200 cursor-pointer hover:bg-gray-300" v-if="canAdd && values.length > 1" @click="remove(index)">remove</div>
             </div>
         </div>
-        <button v-if="canAdd" class="cursor-pointer text-sm btn-green py-1 px-2" @click.prevent="add(null)">Add {{ placeholder }}</button>
+        <button v-if="canAdd" class="cursor-pointer text-sm form-btn-green py-1 px-2" @click.prevent="add(null)">Add {{ placeholder }}</button>
     </div>
 </template>
 

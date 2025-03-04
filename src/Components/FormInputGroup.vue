@@ -1,22 +1,25 @@
 <template>
     <div :class="groupClass">
-        <FormInput v-for="input in formInputs"
+        <FormInput v-for="input in inputs"
                    :form="form"
                    :field="input.field"
                    :id="input.id"
+				   :id-suffix="id"
                    :class="input.class"
                    :type="input.type"
                    :multiple="input.multiple"
                    :acceptable-types="input.acceptableTypes"
                    :max-size="input.maxSize"
                    :select="input.select"
+                   :wysiwyg="input.wysiwyg"
                    :label="input.label"
                    :placeholder="input.placeholder"
                    :autocomplete="input.autocomplete"
                    :required="input.required"
-                   :disabled="input.disabled"
+                   :disabled="input.disabled || disabled"
                    :info="input.info"
                    :indicate-required="typeof input.indicateRequired !== 'undefined' ? input.indicateRequired : indicateRequired"
+				   :errors="errors"
         ></FormInput>
         <slot></slot>
     </div>
@@ -27,6 +30,7 @@ import FormInput from "./FormInput.vue";
 import {computed} from "vue";
 
 const props = defineProps({
+    id: {},
     class: {},
     form: {
         type: Object,
@@ -42,13 +46,14 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
+	errors: {},
 });
 
 const groupClass = computed(() => {
     return props.class ? props.class : 'space-y-6';
 })
-
-const formInputs = computed(() => {
-    return props.inputs.length ? props.inputs : Object.keys(props.form).filter(key => key !== 'id').map(key => ({field: key}));
-});
 </script>

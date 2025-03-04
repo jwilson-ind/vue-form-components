@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Button @click.prevent="open = true" context="btn-red">
+        <Button @click.prevent="open = true" context="form-btn-red">
             Delete
         </Button>
         <DeleteConfirmModal :open="open" @destroy="$emit('destroy')" @close="open=false"/>

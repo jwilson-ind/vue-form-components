@@ -8,12 +8,49 @@
         @apply block whitespace-nowrap text-sm;
     }
 
-    .input-text, .input-textarea, .input-multiple, .multiple-label, .multiple-remove {
-        @apply appearance-none block px-3 py-2 border border-gray-200 placeholder-gray-300 focus:outline-none;
+    .input-text, .input-textarea, .input-multiple, .multiple-label, .multiple-remove, .input-select {
+        @apply appearance-none block px-3 py-2 border placeholder-gray-300 focus:outline-none;
     }
 
-    .input-text, .input-textarea {
+    .input-text, .input-textarea, .input-select {
         @apply placeholder-gray-300 w-full focus:outline-none rounded;
+    }
+
+    .input-text:disabled, .input-textarea:disabled {
+        @apply cursor-not-allowed bg-gray-100;
+    }
+
+    .input-textarea {
+        @apply border-gray-300;
+    }
+
+    .required {
+        .input-label, .checkbox-label, .radio-label {
+            @apply font-bold text-gray-700;
+        }
+        .input-text, .input-textarea, .input-select {
+            @apply border-gray-500 bg-indigo-50;
+        }
+        .multiselect__tags,
+        .multiselect__current {
+            @apply !border-gray-500 !bg-indigo-50;
+        }
+        .multiselect__input, .multiselect__single {
+            @apply !bg-indigo-50
+        }
+    }
+
+    .error {
+        .input-text {
+            @apply !border-red-600;
+        }
+        .input-label {
+            @apply !text-red-600;
+        }
+        .multiselect__tags,
+        .multiselect__current {
+            @apply border-red-600 !important;
+        }
     }
 
     .input-textarea {
@@ -36,36 +73,43 @@
         @apply rounded;
     }
 
-    .input-text,
+    .input-select {
+        @apply pr-9
+    }
+
+    .input-text, .input-select,
     .input-checkbox,
-    .input-radio,
+    .input-radio {
+        @apply border-gray-300;
+    }
+
     .multiselect__tags,
     .multiselect__current,
     .multiselect__content-wrapper {
         @apply border-gray-300 !important;
     }
 
-    .btn-primary, .btn-red, .btn-green, .btn-white {
+    .form-btn-primary, .form-btn-red, .form-btn-green, .form-btn-white {
         @apply py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-offset-2 transition;
     }
 
-    .btn-primary:disabled, .btn-orange:disabled, .btn-red:disabled, .btn-green:disabled, .btn-white:disabled {
+    .form-btn-primary:disabled, .form-btn-orange:disabled, .form-btn-red:disabled, .form-btn-green:disabled, .form-btn-white:disabled {
         @apply cursor-not-allowed bg-gray-400 hover:bg-gray-400;
     }
 
-    .btn-primary {
+    .form-btn-primary {
         @apply bg-blue-600 hover:bg-blue-700 focus:ring-blue-600;
     }
 
-    .btn-white {
+    .form-btn-white {
         @apply bg-white border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-blue-500;
     }
 
-    .btn-green {
+    .form-btn-green {
         @apply bg-green-600 hover:bg-green-700 focus:ring-green-600 capitalize;
     }
 
-    .btn-red {
+    .form-btn-red {
         @apply bg-red-600 hover:bg-red-700 focus:ring-red-600;
     }
 
